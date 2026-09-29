@@ -177,3 +177,4 @@ pyrightconfig.json
 .git
 Dockerfile
 .qodo
+k8s/secrets.local.yaml
