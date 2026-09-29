@@ -1,0 +1,39 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: alembic
+  namespace: app
+spec:
+  backoffLimit: 2
+  activeDeadlineSeconds: 300
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: alembic
+          image: uml-diagram-editor-api:k8s
+          imagePullPolicy: IfNotPresent
+          command: [python, -m, alembic, -c, alembic.ini, upgrade, head]
+          envFrom:
+            - configMapRef:
+                name: back-config
+            - secretRef:
+                name: back-secret
+          env:
+            - name: DB__USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: POSTGRES_USER
+            - name: DB__PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: POSTGRES_PASSWORD
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: "1"
+              memory: 512Mi

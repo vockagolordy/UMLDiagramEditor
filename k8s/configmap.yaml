@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-config
+  namespace: app
+data:
+  POSTGRES_DB: uml
+  PGDATA: /var/lib/postgresql/18/docker
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: back-config
+  namespace: app
+data:
+  DB__DRIVER: postgresql+asyncpg
+  DB__HOST: postgres
+  DB__PORT: "5432"
+  DB__NAME: uml
+  COMMON__DEBUG: "false"
+  COMMON__PORT: "8000"
+  AUTH__JWT_ALGORITHM: HS256
+  AUTH__JWT_ACCESS_TOKEN_EXPIRE: "3600"
+  AUTH__JWT_REFRESH_TOKEN_EXPIRE: "604800"
+  AUTH__JWT_REFRESH_COOKIE_SECURE: "false"
+  AUTH__JWT_REFRESH_COOKIE_SAMESITE: lax
+  FRONTEND__SCHEME: http
+  FRONTEND__HOST: localhost
+  FRONTEND__PORT: "5173"
+  SMTP__HOST: smtp.example.com
+  SMTP__PORT: "587"
+  SMTP__USE_CREDENTIALS: "true"
+  SMTP__STARTTLS: "true"
+  SMTP__SSL_TLS: "false"
+  EMAIL__FROM_EMAIL: noreply@example.com
+  EMAIL__FROM_NAME: UML Diagram Editor
