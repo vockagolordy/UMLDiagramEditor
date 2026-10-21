@@ -20,6 +20,11 @@ spec:
             - secretRef:
                 name: back-secret
           env:
+            - name: DB__NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: POSTGRES_DB
             - name: DB__USER
               valueFrom:
                 secretKeyRef:

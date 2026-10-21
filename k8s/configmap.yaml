@@ -16,7 +16,6 @@ data:
   DB__DRIVER: postgresql+asyncpg
   DB__HOST: postgres
   DB__PORT: "5432"
-  DB__NAME: uml
   COMMON__DEBUG: "false"
   COMMON__PORT: "8000"
   AUTH__JWT_ALGORITHM: HS256
