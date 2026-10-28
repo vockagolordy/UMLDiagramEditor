@@ -4,14 +4,13 @@ metadata:
   name: front-service
   namespace: app
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: frontend
   ports:
     - name: http
       port: 80
       targetPort: http
-      nodePort: 30081
 ---
 apiVersion: apps/v1
 kind: Deployment

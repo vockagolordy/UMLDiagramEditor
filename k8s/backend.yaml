@@ -4,14 +4,13 @@ metadata:
   name: back-service
   namespace: app
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: backend
   ports:
     - name: http
       port: 8000
       targetPort: http
-      nodePort: 30080
 ---
 apiVersion: apps/v1
 kind: Deployment
