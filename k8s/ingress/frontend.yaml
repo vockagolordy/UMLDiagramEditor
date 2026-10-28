@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: frontend
+  namespace: app
+  annotations:
+    cert-manager.io/cluster-issuer: uml-selfsigned
+    cert-manager.io/subject-organizations: UML Diagram Editor Local
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: uml.test
+      http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: back-service
+                port:
+                  number: 8000
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: front-service
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - uml.test
+      secretName: frontend-tls

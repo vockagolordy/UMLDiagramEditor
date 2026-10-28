@@ -21,11 +21,10 @@ data:
   AUTH__JWT_ALGORITHM: HS256
   AUTH__JWT_ACCESS_TOKEN_EXPIRE: "3600"
   AUTH__JWT_REFRESH_TOKEN_EXPIRE: "604800"
-  AUTH__JWT_REFRESH_COOKIE_SECURE: "false"
+  AUTH__JWT_REFRESH_COOKIE_SECURE: "true"
   AUTH__JWT_REFRESH_COOKIE_SAMESITE: lax
-  FRONTEND__SCHEME: http
-  FRONTEND__HOST: localhost
-  FRONTEND__PORT: "5173"
+  # null omits the default HTTPS port from CORS origins and email links.
+  FRONTEND: '{"scheme":"https","host":"uml.test","port":null}'
   SMTP__HOST: smtp.example.com
   SMTP__PORT: "587"
   SMTP__USE_CREDENTIALS: "true"
